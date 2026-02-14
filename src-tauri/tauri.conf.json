@@ -9,12 +9,17 @@
   "app": {
     "withGlobalTauri": true,
     "windows": [
-      {
-        "title": "koeng",
-        "width": 800,
-        "height": 600
-      }
-    ],
+        {
+          "title": "koeng",
+          "width": 100,           
+          "height": 40,
+          "decorations": false,   
+          "transparent": true,    
+          "alwaysOnTop": true,    
+          "resizable": false,
+          "visible": true
+        }
+      ],
     "security": {
       "csp": null
     }
