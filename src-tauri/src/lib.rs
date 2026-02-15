@@ -89,7 +89,7 @@ fn get_best_position_logic() -> (f64, f64) {
                 }
             }
             // 텍스트 커서 위
-            return ((caret.x as f64) - 28.0, (caret.y as f64) - 35.0);
+            return ((caret.x as f64) - 35.0, (caret.y as f64) - 35.0);
         }
     }
 
