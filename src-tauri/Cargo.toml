@@ -22,6 +22,7 @@ tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+objc = "0.2"
 
 # ▼▼▼ 여기부터 중요! 윈도우용 API 기능들 추가 ▼▼▼
 [target.'cfg(target_os = "windows")'.dependencies]
