@@ -5,39 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tauri App</title>
     <style>
-      body {
-        margin: 0; padding: 0; background: transparent; overflow: hidden;
-        display: flex; justify-content: center; align-items: center;
+      html, body {
+        margin: 0; 
+        padding: 0; 
+        background: transparent !important; /* 강제 투명 */
+        overflow: hidden;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
         height: 100vh;
-      }
-      #lang-box {
-        /* ✅ 아주 작은 사이즈 (24px) */
-        width: 24px; 
-        height: 24px; 
-        border-radius: 6px; /* 모서리 살짝 둥글게 */
-        
-        display: flex; justify-content: center; align-items: center;
-        
-        /* ✅ 글자 크기 축소 */
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
-        font-weight: 800; 
-        font-size: 13px; 
-        color: white;
-        
-        /* 그림자도 은은하게 줄임 */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
-        transition: background-color 0.2s;
-        
-        /* 드래그 방지 (커서처럼 보이기 위해) */
-        user-select: none;
-        cursor: default;
+        cursor: default; 
       }
 
-      /* 🇰🇷 한글: 빨강 */
-      .ko { background-color: #ff3b30; border: 1.5px solid rgba(255,255,255,0.8); }
+      #lang-box {
+        /* ✅ 아주 작은 크기 (마우스 커서보다 작음) */
+        width: 18px; 
+        height: 18px; 
+        border-radius: 4px; /* 모서리 살짝만 둥글게 */
+        
+        /* 텍스트 중앙 정렬 */
+        display: flex; justify-content: center; align-items: center;
+        
+        /* ✅ 글자 크기 초소형 */
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+        font-weight: 800; 
+        font-size: 10px; /* 아주 작은 글씨 */
+        color: rgba(255, 255, 255, 0.95); /* 거의 흰색 글자 */
+        
+        /* 경계선: 배경과 구분되도록 아주 얇고 투명한 흰색 테두리 */
+        border: 0.5px solid rgba(255, 255, 255, 0.3);
+        
+        /* 부드러운 색상 변경 */
+        transition: background-color 0.2s ease-in-out;
+        
+        user-select: none;
+      }
+
+      /* ✅ 반투명 배경색 설정 (rgba의 마지막 숫자가 투명도 0~1) */
+
+      /* 🇰🇷 한글: 붉은색 계열 반투명 */
+      .ko { background-color: rgba(220, 53, 69, 0.65); }
       
-      /* 🇺🇸 영어: 파랑 */
-      .en { background-color: #007aff; border: 1.5px solid rgba(255,255,255,0.8); }
+      /* 🇺🇸 영어: 푸른색 계열 반투명 */
+      .en { background-color: rgba(13, 110, 253, 0.65); }
     </style>
   </head>
   <body>
@@ -46,7 +56,6 @@
     <script>
       const box = document.getElementById('lang-box');
       
-      // 전역 변수 사용 (import 에러 방지)
       const tauriEvent = window.__TAURI__ ? window.__TAURI__.event : null;
 
       if (tauriEvent) {
@@ -56,11 +65,12 @@
           await listen('update-status', (event) => {
             const lang = event.payload.lang; 
             
+            // 텍스트와 배경색 클래스를 같이 변경
             if (lang === 'ko') {
               box.innerText = "한";
               box.className = "ko";
             } else {
-              box.innerText = "A"; // En 대신 A로 더 심플하게
+              box.innerText = "A";
               box.className = "en";
             }
           });
